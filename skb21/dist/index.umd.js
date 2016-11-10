@@ -1,13 +1,23 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('express'), require('cors')) :
+  typeof define === 'function' && define.amd ? define(['express', 'cors'], factory) :
+  (factory(global.express,global.cors));
+}(this, (function (express,cors) { 'use strict';
 
-function hello(name) {
-  console.log('Hello ' + name); // eslint-disable-line
-}
-hello('JS World');
+express = 'default' in express ? express['default'] : express;
+cors = 'default' in cors ? cors['default'] : cors;
+
+var app = express();
+app.use(cors());
+app.get('/', function (req, res) {
+  res.json({
+    hello: 'JS World'
+  });
+});
+
+app.listen(3000, function () {
+  console.log('Your app listening on port 3000!');
+});
 
 })));
 //# sourceMappingURL=index.umd.js.map
