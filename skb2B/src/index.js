@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import canonize from './canonize';
+
 const app = express();
 app.use(cors());
 app.get('/', (req, res) => {
